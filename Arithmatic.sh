@@ -1,7 +1,7 @@
 #!/bin/bash -x
-echo "--------------------------------Arithmetic Compution And Sorting ----------------------------------"
+echo "Arithmetic Compution And Sorting"
 
-#TO DECLEAR THE DICTIONARY
+#TO DECLAER THE DICTIONARY
 declare -A arithmaticOperation
 
 #TO TAKING INPUT FROM USER
@@ -35,3 +35,45 @@ do
 done
 #TO PRINT
 echo "${array[@]}"
+
+#TO FUNCTION SORTING RESULTS IN DECENDING ORDER
+function descendingOrderSort()
+{
+	for(( index=0; index<${#array[@]}; index ++ ))
+	do
+		for(( indexOne=0; indexOne<${#array[@]}-1; indexOne ++ ))
+		do
+			if (( $(echo "${array[indexOne+1]} > ${array[indexOne]}" | bc -l ) ))
+			then
+				temp=${array[indexOne]}
+				array[indexOne]=${array[indexOne+1]}
+				array[indexOne+1]=$temp
+			fi
+		done
+	done
+	echo "To data descending order:"${array[@]}
+}
+
+#TO FUNCTION CALL FOR SORTING IN DECENDING ORDER
+descendingOrderSort ${array[@]}
+
+#TO FUNCTION SORTING RESULTS IN ASCENDING ORDER
+function ascendingOrderSort()
+{
+   for(( index=0; index<${#array[@]}; index ++ ))
+   do
+      for(( indexOne=0; indexOne<${#array[@]}-1; indexOne ++ ))
+      do
+         if (( $(echo "${array[indexOne+1]} < ${array[indexOne]}" | bc -l ) ))
+         then
+            temp=${array[indexOne]}
+            array[indexOne]=${array[indexOne+1]}
+            array[indexOne+1]=$temp
+         fi
+      done
+   done
+   echo "To data ascending order:"${array[@]}
+}
+
+#TO FUNCTION CALL FOR SORTING IN ASCENDING ORDER
+ascendingOrderSort ${array[@]}
